@@ -26,22 +26,46 @@ export default function Quiz() {
               ),
               correctAnswer: data.correct_answer,
               userAnswer: "",
-              revealed: false, // needed for styling
+              isRevealed: false, // needed for styling
             };
           });
         })
       );
   }, []); // I want to make the API call just once
 
+  function selectAnswer(questionId, answer) {
+    // get that question, update its property
+
+    console.log(questionId);
+    console.log(answer);
+
+    setQuestionData((prevData) => {
+      return prevData.map((question) => {
+        if (question.id === questionId) {
+          return {
+            ...question,
+            userAnswer: answer,
+          };
+        } else {
+          return question; // must specify the unmodified version too
+        }
+      });
+    });
+  }
+
   console.log(questionData);
 
   const questionElements = questionData.map((question) => {
     return (
       <Question
-        key={question.question}
+        key={question.id}
+        id={question.id}
         question={question.question}
-        correctAnswer={question.correctAnswer}
         answers={question.answers}
+        correctAnswer={question.correctAnswer}
+        userAnswer={question.userAnswer}
+        isRevealed={question.isRevealed}
+        selectAnswer={selectAnswer}
       />
     );
   });

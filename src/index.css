@@ -47,8 +47,13 @@ h1 {
 }
 
 .incorrect {
-  background-color: #D6DBF5;
+  background-color: #F8BCBC;
   border: none;
+}
+
+.revealed {
+  color: #8F94AD;
+  border: 1.4px solid #8F94AD;
 }
 
 .splashscreen {
