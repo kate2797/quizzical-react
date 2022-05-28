@@ -1,27 +1,29 @@
 import React from "react";
 
-// conditionally render the correct answer
-
 export default function Question(props) {
-  // turn selected to incorrect if it is
-
+  /**
+   * turns all answers into <p> JSX elements
+   */
   const answerElements = props.answers.map((answer) => {
-    //const selected = answer === props.userAnswer && "selected";
-    // store these like this
+    // dynamic CSS styling
+    const selected = answer === props.userAnswer && "selected";
+    const correct =
+      answer === props.correctAnswer && props.isRevealed && "correct";
+    const incorrect =
+      answer !== props.correctAnswer &&
+      answer === props.userAnswer &&
+      props.isRevealed &&
+      "incorrect";
+    const revealed =
+      props.isRevealed &&
+      answer !== props.correctAnswer &&
+      answer !== props.userAnswer &&
+      "revealed";
 
     return (
       <p
         key={answer}
-        className={`answer ${answer === props.userAnswer && "selected"} ${
-          answer === props.correctAnswer && props.isRevealed && "correct"
-        } ${
-          answer !== props.correctAnswer &&
-          answer === props.userAnswer &&
-          props.isRevealed &&
-          "incorrect"
-        }
-        ${props.isRevealed && answer !== props.correctAnswer && answer !== props.userAnswer && "revealed"}
-        `}
+        className={`answer ${selected} ${correct} ${incorrect} ${revealed}`}
         onClick={() => props.selectAnswer(props.id, answer)}
       >
         {answer}

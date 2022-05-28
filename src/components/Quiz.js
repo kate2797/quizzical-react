@@ -7,6 +7,9 @@ export default function Quiz({ setHasStarted }) {
   const [score, setScore] = React.useState(0); // number of answers they got correct
   const [gameOver, setGameOver] = React.useState(false);
 
+  const noQuestions = 5;
+  const allLoaded = questionData.length === noQuestions;
+
   /**
    * resets all state
    */
@@ -41,7 +44,9 @@ export default function Quiz({ setHasStarted }) {
    * gets data from the API and transforms them into an array of objects
    */
   React.useEffect(() => {
-    fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+    fetch(
+      `https://opentdb.com/api.php?amount=${noQuestions}&category=18&type=multiple`
+    )
       .then((res) => res.json())
       .then((res) =>
         setQuestionData(() => {
@@ -132,6 +137,7 @@ export default function Quiz({ setHasStarted }) {
       Play Again
     </button>
   );
+
   const checkAnswers = (
     <button className='button-main' onClick={checkAllAnswers}>
       Check Answers
@@ -148,7 +154,7 @@ export default function Quiz({ setHasStarted }) {
           You scored {score}/{questionData.length} correct answers
         </p>
       )}
-      {gameOver ? playAgain : checkAnswers}
+      {allLoaded && gameOver ? playAgain : checkAnswers}
     </>
   );
 }
