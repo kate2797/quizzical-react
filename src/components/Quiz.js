@@ -2,10 +2,20 @@
 import React from "react";
 import Question from "./Question";
 
-export default function Quiz() {
+export default function Quiz({ setHasStarted }) {
   const [questionData, setQuestionData] = React.useState([]);
   const [score, setScore] = React.useState(0); // number of answers they got correct
   const [gameOver, setGameOver] = React.useState(false);
+
+  /**
+   * resets all state
+   */
+  function startOver() {
+    setHasStarted(false);
+    setQuestionData([]);
+    setScore(0);
+    setGameOver(false);
+  }
 
   /**
    * updates the score everytime the the array changes (user may have guessed correctly...)
@@ -114,6 +124,20 @@ export default function Quiz() {
     );
   });
 
+  /**
+   * button JSX elements
+   */
+  const playAgain = (
+    <button className='button-main' onClick={startOver}>
+      Play Again
+    </button>
+  );
+  const checkAnswers = (
+    <button className='button-main' onClick={checkAllAnswers}>
+      Check Answers
+    </button>
+  );
+
   return (
     <>
       <div className='quiz'>
@@ -124,9 +148,7 @@ export default function Quiz() {
           You scored {score}/{questionData.length} correct answers
         </p>
       )}
-      <button className='button-main' onClick={checkAllAnswers}>
-        {gameOver ? "Play Again" : "Check Answers"}
-      </button>
+      {gameOver ? playAgain : checkAnswers}
     </>
   );
 }

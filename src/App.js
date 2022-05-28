@@ -15,7 +15,7 @@ export default function App() {
   return (
     <main>
       {!hasStarted && <SplashScreen startQuiz={startQuiz} />}
-      {hasStarted && <Quiz />}
+      {hasStarted && <Quiz setHasStarted={setHasStarted} />}
     </main>
   );
 }
