@@ -5,8 +5,22 @@ import Question from "../Question";
 export default function Quiz() {
   const [questionData, setQuestionData] = React.useState([]);
   const [score, setScore] = React.useState(0); // number of answers they got correct
+  const [gameOver, setGameOver] = React.useState(false);
 
-  // this component will display the score etc.
+  // everytime the the array changes, update score (may have guessed correctly...)
+  React.useEffect(() => {
+    setScore(computeScore()); // update score
+  }, [questionData]);
+
+  function computeScore() {
+    let score = 0;
+    questionData.forEach((question) => {
+      if (question.isCorrectGuess) {
+        score++;
+      }
+    });
+    return score;
+  }
 
   /**
    * gets data from the API and transforms them into an array of objects
@@ -26,7 +40,8 @@ export default function Quiz() {
               ),
               correctAnswer: data.correct_answer,
               userAnswer: "",
-              isRevealed: false, // needed for styling
+              isRevealed: false, // needed for styling (false by default)
+              isCorrectGuess: false,
             };
           });
         })
@@ -35,7 +50,6 @@ export default function Quiz() {
 
   function selectAnswer(questionId, answer) {
     // get that question, update its property
-
     console.log(questionId);
     console.log(answer);
 
@@ -54,6 +68,27 @@ export default function Quiz() {
   }
 
   console.log(questionData);
+
+  function checkAnswer() {
+    // turn all to revealed, perfom checks
+    setQuestionData((prevData) => {
+      return prevData.map((question) => {
+        if (question.userAnswer === question.correctAnswer) {
+          return {
+            ...question,
+            isRevealed: true,
+            isCorrectGuess: true,
+          };
+        } else {
+          return {
+            ...question,
+            isRevealed: true,
+          };
+        }
+      });
+    });
+    setGameOver(true); // update, the game has ended
+  }
 
   const questionElements = questionData.map((question) => {
     return (
@@ -75,7 +110,14 @@ export default function Quiz() {
       <div className='quiz'>
         <div>{questionElements}</div>
       </div>
-      <button className='button-main'>Check Answers</button>
+      {gameOver && (
+        <p>
+          You scored {score}/{questionData.length} correct answers
+        </p>
+      )}
+      <button className='button-main' onClick={checkAnswer}>
+        {gameOver ? "Play Again" : "Check Answers"}
+      </button>
     </>
   );
 }

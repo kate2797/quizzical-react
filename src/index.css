@@ -43,11 +43,13 @@ h1 {
 
 .correct {
   background-color: #94D7A2;
+  color: #293264;
   border: none;
 }
 
 .incorrect {
   background-color: #F8BCBC;
+  color: #8F94AD;
   border: none;
 }
 
