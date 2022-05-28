@@ -1,17 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
-import Question from "../Question";
+import Question from "./Question";
 
 export default function Quiz() {
   const [questionData, setQuestionData] = React.useState([]);
   const [score, setScore] = React.useState(0); // number of answers they got correct
   const [gameOver, setGameOver] = React.useState(false);
 
-  // everytime the the array changes, update score (may have guessed correctly...)
+  /**
+   * updates the score everytime the the array changes (user may have guessed correctly...)
+   */
   React.useEffect(() => {
     setScore(computeScore()); // update score
   }, [questionData]);
 
+  /**
+   * computes current score
+   */
   function computeScore() {
     let score = 0;
     questionData.forEach((question) => {
@@ -48,11 +53,11 @@ export default function Quiz() {
       );
   }, []); // I want to make the API call just once
 
+  /**
+   * handles selecting an answer
+   */
   function selectAnswer(questionId, answer) {
-    // get that question, update its property
-    console.log(questionId);
-    console.log(answer);
-
+    // get that question, update its userAnswer property
     setQuestionData((prevData) => {
       return prevData.map((question) => {
         if (question.id === questionId) {
@@ -67,9 +72,10 @@ export default function Quiz() {
     });
   }
 
-  console.log(questionData);
-
-  function checkAnswer() {
+  /**
+   * handles checking all answers for correctness at the end of the quiz
+   */
+  function checkAllAnswers() {
     // turn all to revealed, perfom checks
     setQuestionData((prevData) => {
       return prevData.map((question) => {
@@ -90,6 +96,9 @@ export default function Quiz() {
     setGameOver(true); // update, the game has ended
   }
 
+  /**
+   * turns an array of objects into an array of JSX elements
+   */
   const questionElements = questionData.map((question) => {
     return (
       <Question
@@ -115,7 +124,7 @@ export default function Quiz() {
           You scored {score}/{questionData.length} correct answers
         </p>
       )}
-      <button className='button-main' onClick={checkAnswer}>
+      <button className='button-main' onClick={checkAllAnswers}>
         {gameOver ? "Play Again" : "Check Answers"}
       </button>
     </>
