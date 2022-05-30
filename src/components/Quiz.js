@@ -1,5 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
+import { decode } from "he";
+
 import Question from "./Question";
 
 export default function Quiz({ setHasStarted }) {
@@ -8,7 +10,7 @@ export default function Quiz({ setHasStarted }) {
   const [gameOver, setGameOver] = React.useState(false);
 
   const noQuestions = 5;
-  const allLoaded = questionData.length === noQuestions;
+  const allLoaded = questionData.length === noQuestions; // only render a component after all API data has loaded
 
   /**
    * resets all state
@@ -44,9 +46,7 @@ export default function Quiz({ setHasStarted }) {
    * gets data from the API and transforms them into an array of objects
    */
   React.useEffect(() => {
-    fetch(
-      `https://opentdb.com/api.php?amount=${noQuestions}&category=18&type=multiple`
-    )
+    fetch(`https://opentdb.com/api.php?amount=${noQuestions}&type=multiple`)
       .then((res) => res.json())
       .then((res) =>
         setQuestionData(() => {
@@ -54,11 +54,15 @@ export default function Quiz({ setHasStarted }) {
           return res.results.map((data) => {
             return {
               id: index++,
-              question: data.question,
-              answers: [...data.incorrect_answers, data.correct_answer].sort(
-                () => Math.random() - 0.5 // shuffled answers
-              ),
-              correctAnswer: data.correct_answer,
+              question: decode(data.question),
+              answers: [...data.incorrect_answers, data.correct_answer]
+                .sort(
+                  () => Math.random() - 0.5 // shuffled answers
+                )
+                .map((answer) => {
+                  return decode(answer);
+                }),
+              correctAnswer: decode(data.correct_answer),
               userAnswer: "",
               isRevealed: false, // needed for styling (false by default)
               isCorrectGuess: false,
