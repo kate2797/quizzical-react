@@ -13,7 +13,7 @@ h1 {
   font-family: 'Karla', sans-serif;
 }
 
-.button-main {
+button {
   background-color: #4D5B9E;
   border-radius: 15px;
   width: 193px;
@@ -22,16 +22,17 @@ h1 {
   color: #F5F7FB;
   font-size: 16px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .answer {
   background-color: #F5F7FB;
-  width: 97px;
+  min-width: 97px;
   height: 20px;
   font-size: 16px;
   border: 1.4px solid #4D5B9E;
   border-radius: 15px;
-  padding: 7px;
+  padding: 10px;
   text-align: center;
   cursor: pointer;
 }
@@ -67,13 +68,23 @@ h1 {
   padding-top: 33vh;
 }
 
+.splashscreen-container > button {
+  margin-top: 20px;
+  width: 222px;
+}
+
+.splashscreen-container > h1 {
+  font-size: 31.25px;
+}
+
 .quiz {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto;
-  padding-top: 33px;
-  max-width: 550px;
+  padding: 40px 0 40px 0;
+  max-width: 830px;
+  flex-direction: column;
 }
 
 .answers {
@@ -81,4 +92,15 @@ h1 {
   align-items: center;
   justify-content: space-between;
   margin: auto;
+}
+
+.score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.score > h3 {
+  padding-right: 40px;
 }

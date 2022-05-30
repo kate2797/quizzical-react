@@ -2,13 +2,11 @@ import React from "react";
 
 export default function SplashScreen(props) {
   return (
-    <section className="splashscreen">
-      <div>
+    <section className='splashscreen'>
+      <div className='splashscreen-container'>
         <h1>Quizzical</h1>
-        <p>Some description if needed</p>
-        <button className='button-main' onClick={props.startQuiz}>
-          Start Quiz
-        </button>
+        <p>Can you get all of them right?</p>
+        <button onClick={props.startQuiz}>Start Quiz</button>
       </div>
     </section>
   );

@@ -136,29 +136,23 @@ export default function Quiz({ setHasStarted }) {
   /**
    * button JSX elements
    */
-  const playAgain = (
-    <button className='button-main' onClick={startOver}>
-      Play Again
-    </button>
-  );
+  const playAgain = <button onClick={startOver}>Play Again</button>;
 
-  const checkAnswers = (
-    <button className='button-main' onClick={checkAllAnswers}>
-      Check Answers
-    </button>
-  );
+  const checkAnswers = <button onClick={checkAllAnswers}>Check Answers</button>;
 
   return (
     <>
       <div className='quiz'>
         <div>{questionElements}</div>
+        <div className='score'>
+          {gameOver && (
+            <h3>
+              You scored {score}/{questionData.length} correct answers
+            </h3>
+          )}
+          {allLoaded && gameOver ? playAgain : checkAnswers}
+        </div>
       </div>
-      {gameOver && (
-        <p>
-          You scored {score}/{questionData.length} correct answers
-        </p>
-      )}
-      {allLoaded && gameOver ? playAgain : checkAnswers}
     </>
   );
 }
