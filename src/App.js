@@ -1,7 +1,6 @@
 import React from "react";
 import SplashScreen from "./components/SplashScreen";
 import Quiz from "./components/Quiz";
-import Footer from "./components/Footer";
 
 export default function App() {
   const [hasStarted, setHasStarted] = React.useState(false); // state to handle SplashScreen
@@ -19,7 +18,6 @@ export default function App() {
         {!hasStarted && <SplashScreen startQuiz={startQuiz} />}
         {hasStarted && <Quiz setHasStarted={setHasStarted} />}
       </main>
-      <Footer />
     </>
   );
 }
