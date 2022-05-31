@@ -25,6 +25,12 @@ button {
   font-weight: bold;
 }
 
+.separator {
+  border: 0.6px solid #DBDEF0;
+  outline: none;
+  margin: 28px 0 34px 0;
+}
+
 .answer {
   background-color: #F5F7FB;
   color: #293264;
@@ -34,7 +40,7 @@ button {
   border: 1.4px solid #4D5B9E;
   border-radius: 15px;
   padding: 10px;
-  margin: 0 5px 30px 5px;
+  margin: 0 5px 0 5px;
   text-align: center;
   cursor: pointer;
 }
@@ -104,7 +110,7 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 40px;
+  margin-top: 10px;
 }
 
 .score > h3 {
@@ -118,9 +124,4 @@ button {
   justify-content: center;
   font-size: 14px;
   color: #4D5B9E;
-}
-
-.solid {
-  border: 0.6px solid #DBDEF0;
-  outline:none;
 }

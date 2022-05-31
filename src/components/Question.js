@@ -33,9 +33,9 @@ export default function Question(props) {
 
   return (
     <section>
-      <h2 className="question">{props.question}</h2>
+      <h2 className='question'>{props.question}</h2>
       <div className='answers'>{answerElements}</div>
-      <hr class="solid"></hr>
+      <hr class='separator'></hr>
     </section>
   );
 }
