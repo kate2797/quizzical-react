@@ -21,13 +21,13 @@ export default function Question(props) {
       "revealed";
 
     return (
-      <p
+      <button
         key={answer}
         className={`answer ${selected} ${correct} ${incorrect} ${revealed}`}
         onClick={() => props.selectAnswer(props.id, answer)}
       >
         {answer}
-      </p>
+      </button>
     );
   });
 

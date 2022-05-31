@@ -27,12 +27,14 @@ button {
 
 .answer {
   background-color: #F5F7FB;
+  color: #293264;
   min-width: 97px;
-  height: 20px;
+  height: 40px;
   font-size: 16px;
   border: 1.4px solid #4D5B9E;
   border-radius: 15px;
   padding: 10px;
+  margin: 0 5px 30px 5px;
   text-align: center;
   cursor: pointer;
 }
@@ -83,7 +85,7 @@ button {
   justify-content: center;
   margin: auto;
   padding: 40px 0 40px 0;
-  max-width: 900px;
+  max-width: 980px;
   flex-direction: column;
 }
 
