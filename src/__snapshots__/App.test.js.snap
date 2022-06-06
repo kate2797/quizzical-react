@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test snapshots App snapshot 1`] = `
+<Fragment>
+  <main>
+    <SplashScreen
+      startQuiz={[Function]}
+    />
+  </main>
+</Fragment>
+`;

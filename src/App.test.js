@@ -4,6 +4,7 @@ import { shallow } from "enzyme";
 import App from "./App";
 import SplashScreen from "./components/SplashScreen";
 import Quiz from "./components/Quiz";
+import toJson from "enzyme-to-json";
 
 /**
  * test suite 1 - rendering (regression tests)
@@ -35,4 +36,9 @@ describe("test rendering of components", () => {
 /**
  * test suite 4 - snapshots (regression tests)
  */
-// todo
+describe("test snapshots", () => {
+  it("App snapshot", () => {
+    const tree = shallow(<App />);
+    expect(toJson(tree)).toMatchSnapshot();
+  });
+});
