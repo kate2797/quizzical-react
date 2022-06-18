@@ -1,10 +1,13 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { mount, shallow } from "enzyme";
 
 import App from "./App";
 import SplashScreen from "./components/SplashScreen";
 import Quiz from "./components/Quiz";
 import toJson from "enzyme-to-json";
+
+// setup
+const setHasStarted = true;
 
 /**
  * test suite 1 - rendering (regression tests)
@@ -26,12 +29,18 @@ describe("test rendering of components", () => {
 /**
  * test suite 2 - passing props (unit tests: individual componets or pure functions)
  */
-// todo
+describe("test passing props", () => {
+  const quizWrapper = mount(<Quiz setHasStarted={setHasStarted} />);
+
+  it("accepts function props", () => {
+    expect(quizWrapper.props().setHasStarted).toEqual(setHasStarted);
+  });
+});
 
 /**
  * test suite 3 - logic (unit tests)
  */
-// todo
+// left out - no complicated logic lives in App
 
 /**
  * test suite 4 - snapshots (regression tests)
