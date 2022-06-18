@@ -15,8 +15,11 @@ export default function App() {
   return (
     <>
       <main>
-        {!hasStarted && <SplashScreen startQuiz={startQuiz} />}
-        {hasStarted && <Quiz setHasStarted={setHasStarted} />}
+        {hasStarted ? (
+          <Quiz setHasStarted={setHasStarted} />
+        ) : (
+          <SplashScreen startQuiz={startQuiz} />
+        )}
       </main>
     </>
   );
